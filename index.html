@@ -12,18 +12,20 @@
             color: #ffffff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
             margin: 0;
+            padding-top: 50px; /* Move o conteúdo mais para cima */
+            padding-bottom: 50px; /* Adiciona espaço na parte inferior */
             font-family: "Shadows Into Light", cursive;
             text-align: center;
+            box-sizing: border-box; /* Inclui padding no cálculo da altura */
         }
 
         #text-container {
             font-size: 30px;
             max-width: 80%;
-            margin-top: 20px;
+            margin-top: 100px;
             opacity: 1;
             transition: opacity 1s ease-in-out;
         }
@@ -53,7 +55,7 @@
         const textElement = document.getElementById("text-container");
         const spotifyContainer = document.getElementById("spotify-container");
         const text1 = "Faz um bom tempo desde a última vez que se falamos, e espero que você esteja bem. Naquele último momento em que conversamos, eu tentei entender o que aconteceu e talvez eu tenha sido um pouco babaca com você, mas não era minha intenção. Se de alguma forma te magoei, peço desculpas. Você foi importante para mim.";
-        const text2 = "Uma coisa é, eu sempre me recordo quando ouço essa música o quanto você a amava. Então, vou deixar ela aqui, para te mostrar que uma parte de você ficou comigo, e espero que você possa sorrir ouvindo ela.";
+        const text2 = "Sempre que ouço essa música, me lembro do quanto você a amava. Por isso, deixei ela aqui pra você, uma forma de mostrar que um pedacinho de você ainda vive comigo. Espero que ela te faça sorrir ao ouvir.";
         const initialMessage = "Oi Haru, como você tá?";
 
         function typeText(element, message, callback) {
@@ -75,13 +77,11 @@
             type();
         }
 
-
         typeText(textElement, initialMessage, () => {
             textElement.style.opacity = 0; 
             setTimeout(() => {
                 textElement.textContent = ""; 
                 textElement.style.opacity = 1; 
-
                 typeText(textElement, text1, () => {
                     textElement.style.opacity = 0; 
                     setTimeout(() => {
