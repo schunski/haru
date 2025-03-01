@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haru Takemura</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Shadows Into Light", cursive;
+            text-align: center;
+        }
+
+        #text-container {
+            font-size: 30px;
+            max-width: 80%;
+            margin-top: 20px;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .stitch-video {
+            width: 500px;
+            height: auto;
+        }
+
+        .spotify-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .highlight {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="text-container"></div>
+    <div id="spotify-container" class="spotify-container">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2BnJUYbPtL3yauZKmay0ko?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    
+    <script>
+        const textElement = document.getElementById("text-container");
+        const spotifyContainer = document.getElementById("spotify-container");
+        const text1 = "Faz um bom tempo desde a última vez que se falamos, e espero que você esteja bem. Naquele último momento em que conversamos, eu tentei entender o que aconteceu e talvez eu tenha sido um pouco babaca com você, mas não era minha intenção. Se de alguma forma te magoei, peço desculpas. Você foi importante para mim.";
+        const text2 = "Uma coisa é, eu sempre me recordo quando ouço essa música o quanto você a amava. Então, vou deixar ela aqui, para te mostrar que uma parte de você ficou comigo, e espero que você possa sorrir ouvindo ela.";
+        const initialMessage = "Oi Haru, como você tá?";
+
+        function typeText(element, message, callback) {
+            let index = 0;
+            let isTyping = true;
+
+            function type() {
+                if (isTyping) {
+                    element.innerHTML = message.substring(0, index);
+                    index++;
+                    if (index > message.length) {
+                        isTyping = false;
+                        setTimeout(callback, 2000); 
+                    } else {
+                        setTimeout(type, 100);
+                    }
+                }
+            }
+            type();
+        }
+
+
+        typeText(textElement, initialMessage, () => {
+            textElement.style.opacity = 0; 
+            setTimeout(() => {
+                textElement.textContent = ""; 
+                textElement.style.opacity = 1; 
+
+                typeText(textElement, text1, () => {
+                    textElement.style.opacity = 0; 
+                    setTimeout(() => {
+                        textElement.textContent = ""; 
+                        textElement.style.opacity = 1; 
+                        typeText(textElement, text2, () => {
+                            spotifyContainer.style.display = "block"; 
+                        });
+                    }, 1000); 
+                });
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
